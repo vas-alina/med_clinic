@@ -31,6 +31,12 @@ app.post('/', async (req, res) => {
 const start = async () => {
     try {
         await sequelize.authenticate()
+        .then(() => {
+            console.log('Connection to PostgreSQL has been established successfully.');
+        })
+        .catch(err => {
+            console.error('Unable to connect to the database:', err);
+        });
         await sequelize.sync()
         app.listen(PORT, () => {
             console.log(`Server started on port ${PORT}`);
